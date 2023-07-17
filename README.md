@@ -8,19 +8,9 @@ Ayudas: node --help
 
 3- Instalar express, sql, nodemon: npm install express mssql nodemon cors dotenv express-validator morgan
 
-4- Instalar npm i --save-dev @types/express
+4- Instalar babel: npm i @babel/cli @babel/core @babel/node @babel/plugin-transform-runtime @babel/preset-env
 
-5- Instalar babel: npm i @babel/cli 
-
-6- Instalar babel: npm i @babel/core 
-
-7- Instalar babel: npm i @babel/node 
-
-8- Instalar babel: npm i @babel/plugin-transform-runtime 
-
-9- Instalar babel: npm i @babel/preset-env 
-
-10- Creamos archivo babel para desarrollo moderno y poder usar los import: .babelrc 
+5- Creamos archivo babel para desarrollo moderno y poder usar los import: .babelrc 
 
 {
   "presets": ["@babel/preset-env"],
@@ -28,21 +18,20 @@ Ayudas: node --help
 }
 
 
-11- Creamos archivo: .gitignore
+6- Creamos archivo: .gitignore
 
 .env
 node_modules
 request
 dist
 
+7-Agregar scriptS en package.json:  
 
-12-Agregar script en package.json:  "dev": "nodemon --exec npx babel-node src/index.js",
+  "dev": "nodemon --exec npx babel-node src/index.js",
+  "build": "babel src -d dist",
+  "start": "node dist"
 
-13-Agregar script en package.json:  "build": "babel src -d dist",
-
-14-Agregar script en package.json:  "start": "node dist"
-
-15-Creamos archivo de las variables de entorno .env
+8-Creamos archivo de las variables de entorno .env
 
 PORT = 5000
 DB_USER = "diego.acevedo"
@@ -50,9 +39,9 @@ DB_PASSWORD = "Medellin1*"
 DB_SERVER = "localhost"
 DB_DATABASE = "Prueba"
 
-16-Creamos carpeta src. 
+9-Creamos carpeta src. 
 
-17-Creamos archivo config.js en carpeta src: 
+10-Creamos archivo config.js en carpeta src: 
 
 import { config } from "dotenv";
 
@@ -67,7 +56,7 @@ export default {
 };
 
 
-18-Creamos archivo app.js en carpeta src :
+11-Creamos archivo app.js en carpeta src :
 
 import express from "express";
 import config from "./config";
@@ -98,7 +87,7 @@ export default app;
 
 
 
-19-Creamos archivo index.js en carpeta src:
+12-Creamos archivo index.js en carpeta src:
 
 import app from "./app";
 
@@ -106,9 +95,9 @@ app.listen(app.get("port"));
 
 console.log(`Server corriendo en http://localhost:${app.get("port")}`);
 
-20- Creamos carpeta database en carpeta src.
+13- Creamos carpeta database en carpeta src.
 
-21- Creamos archivo connection.js en carpeta database:
+14- Creamos archivo connection.js en carpeta database:
 
 import sql from "mssql";
 import config from "../config";
@@ -138,7 +127,7 @@ export { sql };
 
 
 
-22- Creamos archivo persona.queries.js en carpeta database:
+15- Creamos archivo persona.queries.js en carpeta database:
 
 
 export const PersonaQueries = {
@@ -152,14 +141,14 @@ export const PersonaQueries = {
 };
 
 
-23- Creamos archivo index.js en carpeta database:
+16- Creamos archivo index.js en carpeta database:
 
 export { PersonaQueries } from "./persona.queries";
 export { getConnection, sql } from "./connection";
 
 
 
-24- Creamos carpeta middlewares en src y archivo persona.validator.js adentro de middlewares:
+17- Creamos carpeta middlewares en src y archivo persona.validator.js adentro de middlewares:
 
 
 import { body, validationResult } from "express-validator";
@@ -218,7 +207,7 @@ export function resultValidacionesPersona(req, res, next) {
 }
 
 
-25- Creamos archivo index.js en carpeta middlewares:
+18- Creamos archivo index.js en carpeta middlewares:
 
 export {
   validaCreatePersona,
@@ -228,7 +217,7 @@ export {
 
 
 
-26- Creamos carpeta services adentro de src y el archivo persona.service.js en carpeta services:
+19- Creamos carpeta services adentro de src y el archivo persona.service.js en carpeta services:
 
 
 
@@ -297,7 +286,7 @@ export const deletePersona = async (req, res) => {
 
 
 
-27- Creamos carpeta controllers adentro de carpeta src y archivo persona.controller.js adentro de la carpeta controllers:
+20- Creamos carpeta controllers adentro de carpeta src y archivo persona.controller.js adentro de la carpeta controllers:
 
 
 import * as personaService from "../services/persona.service";
@@ -366,7 +355,7 @@ export const deletePersona = async (req, res) => {
 
 
 
-28- Creamos carpeta routers adentro de carpeta src y archivo persona.routes.js adentro de la carpeta routers:
+21- Creamos carpeta routers adentro de carpeta src y archivo persona.routes.js adentro de la carpeta routers:
 
 
 
@@ -411,9 +400,9 @@ export default router;
 
 
 
-29- Instalamos swagger: npm i swagger-ui-express -S 
+22- Instalamos swagger: npm i swagger-ui-express -S 
 
-30- Creamos archivo swagger.json afuera de src:
+23- Creamos archivo swagger.json afuera de src:
 
 
 
