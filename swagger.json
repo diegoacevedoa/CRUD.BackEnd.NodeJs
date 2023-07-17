@@ -1,0 +1,178 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "CRUD BackEnd NodeJs",
+    "description": "APIs CRUD",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:5000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Personas",
+      "description": "API de personas"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/api/persona": {
+      "post": {
+        "tags": ["Personas"],
+        "summary": "Crea un nuevo registro.",
+        "parameters": [
+          {
+            "name": "persona",
+            "in": "body",
+            "description": "Registro que se va a crear.",
+            "schema": {
+              "$ref": "#/definitions/createPersona"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Nueva registro creado.",
+            "schema": {
+              "$ref": "#/definitions/Persona"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Personas"],
+        "summary": "Consulta todos los registros.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Personas"
+            }
+          }
+        }
+      }
+    },
+    "/api/persona/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID del registro que se va a buscar.",
+          "type": "integer"
+        }
+      ],
+      "get": {
+        "summary": "Consulta un registro por ID.",
+        "tags": ["Personas"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Persona"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Elimina un registro por ID.",
+        "tags": ["Personas"],
+        "responses": {
+          "200": {
+            "description": "Registro eliminado.",
+            "schema": {
+              "$ref": "#/definitions/Persona"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Actualiza un registro por ID.",
+        "tags": ["Personas"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "body",
+            "description": "Registro con nuevos valores",
+            "schema": {
+              "$ref": "#/definitions/updatePersona"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Registro actualizado.",
+            "schema": {
+              "$ref": "#/definitions/Persona"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Persona": {
+      "required": ["idPersona", "noDocumento", "nombres", "apellidos"],
+      "properties": {
+        "idPersona": {
+          "type": "number",
+          "uniqueItems": true
+        },
+        "noDocumento": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "nombres": {
+          "type": "string"
+        },
+        "apellidos": {
+          "type": "string"
+        }
+      }
+    },
+    "createPersona": {
+      "required": ["noDocumento", "nombres", "apellidos"],
+      "properties": {
+        "noDocumento": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "nombres": {
+          "type": "string"
+        },
+        "apellidos": {
+          "type": "string"
+        }
+      }
+    },
+    "updatePersona": {
+      "required": ["idPersona", "noDocumento", "nombres", "apellidos"],
+      "properties": {
+        "idPersona": {
+          "type": "number",
+          "uniqueItems": true
+        },
+        "noDocumento": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "nombres": {
+          "type": "string"
+        },
+        "apellidos": {
+          "type": "string"
+        }
+      }
+    },
+    "Personas": {
+      "type": "array",
+      "$ref": "#/definitions/Persona"
+    }
+  }
+}
