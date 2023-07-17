@@ -1,6 +1,7 @@
 	PASOS DESARROLLO NODEJS
 
 Ayudas: node --help
+
 1- Instalar nodej si no lo tiene instalado en la máquina
 
 2- Crear el proyecto nodejs: npm init -y  --> (-y) es para todas las opciones.
